@@ -1,0 +1,90 @@
+import numpy as np 
+import pandas as pd 
+import seaborn as sns 
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("credit_score.csv")
+df.head()
+
+df.shape
+
+df["Credit_Score"]
+
+df = df.drop(columns=['Unnamed: 0'])
+df.info()
+
+df.describe()
+
+df.isnull().sum()
+
+plt.figure(figsize=(12,6))
+sns.heatmap(df.isnull(), cbar=False, yticklabels=False)
+plt.title("Missing values in heatmap")
+plt.show()
+
+df.head()
+
+X = df.drop("Credit_Score",axis=1,)
+y = df['Credit_Score']
+
+X.head()
+
+y.head()
+
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test = train_test_split(X,y, test_size=0.2, random_state=51)
+
+print("The shape of X_train", X_train.shape)
+print("The shape of y_train", y_train.shape)
+print("The shape of X_test", X_test.shape)
+print("The shape of y_test", y_test.shape)
+
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+X_train_scale = scaler.fit_transform(X_train)
+X_test_scale = scaler.fit_transform(X_test)
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+# Train model 
+model = LogisticRegression() 
+model.fit(X_train_scale,y_train)
+
+# Predict
+y_pred = model.predict(X_test_scale)
+
+# Evaluate
+print(classification_report(y_test, y_pred))
+
+# Calculate Accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+
+
+from sklearn.ensemble import RandomForestClassifier
+
+# Initialize model
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+
+# Train
+rf_model.fit(X_train_scale, y_train)
+
+y_pred = rf_model.predict(X_test_scale)
+
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+
+
+
+
+from sklearn.tree import DecisionTreeClassifier
+model_t = DecisionTreeClassifier(random_state=42)
+
+model_t.fit(X_train_scale,y_train)
+
+y_pred = model_t.predict(X_test_scale)
+
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+
