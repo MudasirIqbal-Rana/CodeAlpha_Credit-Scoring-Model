@@ -92,28 +92,39 @@ Performance compared with other models
 
 📈 Model Performance
 Model	Accuracy
+
 Logistic Regression	Evaluated
+
 Decision Tree	Evaluated
+
 Random Forest	77% ✅
+
 🚀 How to Run the Project
+
 1️⃣ Install dependencies
+
 pip install numpy pandas matplotlib seaborn scikit-learn
 
 2️⃣ Run the notebook
+
 jupyter notebook Credit_Scoring_Model.ipynb
 
 📁 Project Structure (Suggested)
 Credit-Scoring-Model/
-│
+
+
 ├── data/
-│   └── credit_score.csv
-│
+   └── credit_score.csv
+
+
 ├── notebooks/
-│   └── Credit_Scoring_Model.ipynb
-│
+   └── Credit_Scoring_Model.ipynb
+
+
 ├── src/
-│   └── model_training.py
-│
+   └── model_training.py
+
+
 ├── README.md
 ├── requirements.txt
 └── Credit_Scoring_Model.txt
